@@ -36,6 +36,7 @@ export default class Header extends PureComponent {
     this.setBoundaries();
   }
 
+  // TODO 日期格式从配置获取
   getFormat(mode, position) {
     switch (mode) {
       case 'year':
@@ -190,14 +191,16 @@ export default class Header extends PureComponent {
   };
 
   render() {
-    if (this.refs.Header) this.refs.Header.scrollLeft = this.props.scrollLeft;
+    if (this.Header) {
+      this.Header.scrollLeft = this.props.scrollLeft;
+    }
     //Check boundaries to see if wee need to recalcualte header
     // if (this.needToRender()|| !this.cache){
     //     this.cache=this.renderHeader();
     //     this.setBoundaries();
     // }
     return (
-      <div id="timeline-header" ref="Header" className="timeLine-main-header-viewPort">
+      <div id="timeline-header" ref={el=>(this.Header=el)} className="timeLine-main-header-viewPort">
         {this.renderHeader()}
       </div>
     );
